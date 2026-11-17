@@ -5,7 +5,7 @@
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Tests Passing](https://img.shields.io/badge/tests-33%2F33%20passing-brightgreen.svg)]()
 [![Model Calibration](https://img.shields.io/badge/Holdout%20AUC-0.8763%20(Chases)-success.svg)](outputs/charts/win_prob_calibration.png)
-[![Monte Carlo Stability](https://img.shields.io/badge/P(Top%2010)-97.8%25%20(SKY)%20%7C%2084.0%25%20(Bumrah)-blueviolet.svg)]()
+[![Monte Carlo Stability](https://img.shields.io/badge/P(Top%2010)-93.6%25%20(SKY)%20%7C%2098.8%25%20(Bumrah)-blueviolet.svg)]()
 [![Report Format](https://img.shields.io/badge/Submission-Methodology%20Report%20(PDF)-gold.svg)](outputs/reports/PRESSURE_X_METHODOLOGY_REPORT.pdf)
 
 ---
@@ -25,7 +25,7 @@ To answer this, PRESSURE-X implements an end-to-end, ball-by-ball machine-learni
 - **Strict Chronological Holdout**: Evaluated on 171 completely unseen holdout matches (39,478 deliveries) partitioned strictly by match date (`max(train_dates) < min(test_dates)`), achieving **0.8763 ROC-AUC** in 2nd innings chases.
 - **Uncertainty Quantification**: 1,000 match-clustered Monte Carlo bootstrap iterations establish 95% rank credibility intervals and Top-10 inclusion probabilities.
 
-The resulting leaderboards crown **Tim David** (BPI: **179.7**, $P(\text{Top 10}) = 96.9\%$) and **Suryakumar Yadav** (BPI: **177.3**, $P(\text{Top 10}) = 97.8\%$) as the top batting pressure performers, and **Rashid Khan** (BPI: **137.6**, $P(\text{Top 10}) = 79.9\%$) and **Jasprit Bumrah** (BPI: **137.4**, $P(\text{Top 10}) = 84.0\%$) as the premier bowling pressure suppressors in modern T20 cricket. In IPL-only competition splits, **Suryakumar Yadav** (BPI: **137.8**) and **Jasprit Bumrah** (BPI: **146.8**) lead their respective categories.
+The resulting leaderboards crown **Suryakumar Yadav** (Batting Pressure Index: **158.9**, $P(\text{Top 10}) = 93.6\%$) and **Jasprit Bumrah** (Bowling Pressure Index: **153.3**, $P(\text{Top 10}) = 98.8\%$) as the undisputed elite pressure performers in modern T20 cricket. In IPL-only competition splits, **Suryakumar Yadav** (BPI: **137.8**) and **Jasprit Bumrah** (BPI: **146.8**) lead their respective categories.
 
 ---
 
@@ -117,35 +117,65 @@ All candidates were evaluated under strict qualification thresholds:
 - Minimum **8 competitive matches**
 - Minimum **20 high-pressure legal balls** ($P_t > 0.666$)
 
-### Official Top 10 Batters (Combined T20)
+### Table 7: Top 10 Combined T20 Batters
 
-| Rank | Player Name | Matches | Legal Balls | Total Deliv | Actual Runs | Exp Runs | PRAA Total | Net WPA | P(Top 10) | Median Rank | 95% Rank CI | BPI Score |
+| Rank | Player | Matches | Runs | PRAA | BPI |
+|:---:|:---|:---:|:---:|:---:|:---:|
+| **1** | **Suryakumar Yadav** | 139 | 4,595 | 895.3 | **158.9** |
+| **2** | **Tim David** | 98 | 2,178 | 435.1 | **155.6** |
+| **3** | **Jos Buttler** | 121 | 4,396 | 288.3 | **141.1** |
+| **4** | **Heinrich Klaasen** | 72 | 2,363 | 342.7 | **131.9** |
+| **5** | **Andre Russell** | 57 | 1,254 | 261.2 | **124.6** |
+| **6** | **Glenn Maxwell** | 75 | 1,542 | 202.6 | **114.8** |
+| **7** | **Namboori Tilak Varma** | 127 | 3,596 | 87.9 | **112.4** |
+| **8** | **Donovan Ferreira** | 30 | 562 | 112.8 | **111.3** |
+| **9** | **Ashutosh Sharma** | 28 | 577 | 78.5 | **110.7** |
+| **10** | **Naman Dhir** | 46 | 992 | 200.5 | **110.0** |
+
+#### Detailed Batting Metrics & Monte Carlo Stability
+| Rank | Player Name | Matches | Balls | Actual Runs | Exp Runs | PRAA Total | Net WPA | P(Top 10) | Median Rank | 95% Rank CI | BPI Score |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **1** | **Suryakumar Yadav** | 139 | 2,850 | 4,595 | 3,935.6 | +895.3 | +4.95 | **93.6%** | 2.0 | [1 - 14] | **158.9** |
+| **2** | **Tim David** | 98 | 1,293 | 2,178 | 1,879.5 | +435.1 | +4.37 | **91.2%** | 3.0 | [1 - 20] | **155.6** |
+| **3** | **Jos Buttler** | 121 | 2,920 | 4,396 | 4,175.1 | +288.3 | +3.28 | **74.0%** | 5.0 | [1 - 26] | **141.1** |
+| **4** | **Heinrich Klaasen** | 72 | 1,480 | 2,363 | 2,128.7 | +342.7 | +3.63 | **74.8%** | 6.0 | [1 - 26] | **131.9** |
+| **5** | **Andre Russell** | 57 | 785 | 1,254 | 1,081.0 | +261.2 | +1.56 | **59.6%** | 8.0 | [1 - 32] | **124.6** |
+| **6** | **Glenn Maxwell** | 75 | 1,004 | 1,542 | 1,391.8 | +202.9 | +2.38 | **46.4%** | 12.0 | [2 - 42] | **114.8** |
+| **7** | **Namboori Tilak Varma** | 127 | 2,631 | 3,596 | 3,570.8 | +87.9 | +2.92 | **40.0%** | 14.0 | [1 - 45] | **112.4** |
+| **8** | **Donovan Ferreira** | 30 | 354 | 562 | 488.6 | +112.8 | -0.18 | **40.0%** | 15.5 | [2 - 47] | **111.3** |
+| **9** | **Ashutosh Sharma** | 28 | 369 | 577 | 529.2 | +78.5 | +1.35 | **43.2%** | 12.0 | [1 - 48] | **110.7** |
+| **10** | **Naman Dhir** | 46 | 603 | 992 | 857.4 | +200.5 | +0.53 | **36.0%** | 14.0 | [2 - 42] | **110.0** |
+
+---
+
+### Top 10 Combined T20 Bowlers
+
+| Rank | Player | Matches | Wickets | PRPA | BPI |
+|:---:|:---|:---:|:---:|:---:|:---:|
+| **1** | **Jasprit Bumrah** | 75 | 85 | 747.1 | **153.3** |
+| **2** | **Rashid Khan** | 122 | 153 | 378.2 | **136.0** |
+| **3** | **Sunil Narine** | 67 | 66 | 502.7 | **130.4** |
+| **4** | **Ehsan Khan** | 14 | 19 | 126.9 | **121.9** |
+| **5** | **Josh Hazlewood** | 65 | 98 | 175.9 | **111.7** |
+| **6** | **Nathan Ellis** | 43 | 58 | 229.7 | **109.8** |
+| **7** | **Kuldeep Yadav** | 89 | 118 | 148.1 | **108.1** |
+| **8** | **Varun Chakravarthy** | 95 | 135 | 159.4 | **106.0** |
+| **9** | **Mustafizur Rahman** | 71 | 79 | 487.0 | **102.4** |
+| **10** | **Bhuvneshwar Kumar** | 101 | 115 | 365.8 | **101.5** |
+
+#### Detailed Bowling Metrics & Monte Carlo Stability
+| Rank | Player Name | Matches | Balls | Actual Conc. | Exp Conc. | Wkts (WAA) | PRPA Total | Net WPA | P(Top 10) | Median Rank | 95% Rank CI | BPI Score |
 |:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **1** | **Tim David** | 98 | 1,210 | 1,293 | 2,178 | 1862.3 | +464.9 | +5.64 | **96.9%** | 2.0 | [1 - 11] | **179.7** |
-| **2** | **Suryakumar Yadav** | 139 | 2,748 | 2,850 | 4,595 | 3930.6 | +907.7 | +5.28 | **97.8%** | 2.0 | [1 - 10] | **177.3** |
-| **3** | **Heinrich Klaasen** | 72 | 1,408 | 1,480 | 2,363 | 2136.4 | +332.3 | +3.43 | **66.8%** | 8.0 | [1 - 27] | **129.8** |
-| **4** | **Rajat Patidar** | 48 | 916 | 970 | 1,541 | 1376.5 | +238.0 | +1.52 | **56.6%** | 9.0 | [1 - 45] | **128.3** |
-| **5** | **Andre Russell** | 57 | 724 | 785 | 1,254 | 1071.0 | +277.7 | +1.37 | **64.4%** | 8.0 | [2 - 32] | **127.1** |
-| **6** | **Jos Buttler** | 121 | 2,820 | 2,920 | 4,396 | 4167.8 | +295.5 | +3.47 | **57.9%** | 9.0 | [2 - 29] | **125.7** |
-| **7** | **Namboori Tilak Varma** | 127 | 2,500 | 2,631 | 3,596 | 3557.5 | +109.4 | +2.92 | **52.4%** | 10.0 | [1 - 42] | **120.0** |
-| **8** | **Naman Dhir** | 46 | 588 | 603 | 992 | 850.5 | +207.2 | +1.34 | **48.2%** | 11.0 | [2 - 36] | **117.2** |
-| **9** | **Donovan Ferreira** | 30 | 341 | 354 | 562 | 483.7 | +119.3 | +0.36 | **39.2%** | 14.0 | [2 - 47] | **111.9** |
-| **10** | **Shreyas Iyer** | 98 | 1,858 | 1,935 | 2,856 | 2731.9 | +177.2 | +3.07 | **40.3%** | 13.0 | [2 - 41] | **111.9** |
-
-### Official Top 10 Bowlers (Combined T20)
-
-| Rank | Player Name | Matches | Legal Balls | Total Deliv | Actual Conc. | Exp Conc. | Wkts (WAA) | PRPA Total | Net WPA | P(Top 10) | Median Rank | 95% Rank CI | BPI Score |
-|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **1** | **Rashid Khan** | 122 | 2,747 | 2,780 | 3,403 | 3683.5 | 153 (+9.5) | +391.2 | +4.94 | **79.9%** | 4.0 | [1 - 26] | **137.6** |
-| **2** | **Jasprit Bumrah** | 75 | 1,708 | 1,780 | 2,069 | 2587.2 | 85 (-11.0) | +743.3 | +1.55 | **84.0%** | 4.0 | [1 - 21] | **137.4** |
-| **3** | **Sunil Narine** | 67 | 1,533 | 1,556 | 1,754 | 2115.5 | 66 (-10.5) | +506.2 | +2.56 | **80.8%** | 5.0 | [1 - 24] | **133.3** |
-| **4** | **Ehsan Khan** | 14 | 323 | 331 | 384 | 473.2 | 19 (-0.3) | +137.3 | +1.08 | **64.4%** | 8.0 | [1 - 31] | **124.6** |
-| **5** | **Nathan Ellis** | 43 | 916 | 959 | 1,260 | 1418.0 | 58 (+3.7) | +222.1 | +2.64 | **56.8%** | 9.0 | [1 - 37] | **120.4** |
-| **6** | **Bhuvneshwar Kumar** | 101 | 2,221 | 2,314 | 3,069 | 3336.7 | 115 (-9.6) | +377.5 | +2.83 | **47.6%** | 11.0 | [1 - 44] | **113.6** |
-| **7** | **Matheesha Pathirana** | 54 | 1,132 | 1,279 | 1,670 | 1905.1 | 82 (+5.2) | +330.6 | +1.09 | **44.4%** | 12.0 | [2 - 39] | **112.2** |
-| **8** | **Kuldeep Yadav** | 89 | 1,914 | 1,965 | 2,557 | 2669.8 | 118 (+19.1) | +164.4 | +2.58 | **41.6%** | 12.0 | [1 - 44] | **110.9** |
-| **9** | **Axar Patel** | 136 | 2,670 | 2,707 | 3,512 | 3645.9 | 120 (-13.6) | +172.0 | +4.31 | **34.2%** | 16.0 | [2 - 46] | **105.8** |
-| **10** | **Mitchell Santner** | 83 | 1,737 | 1,793 | 2,155 | 2324.0 | 87 (+0.2) | +199.9 | +2.23 | **34.0%** | 16.0 | [2 - 47] | **105.0** |
+| **1** | **Jasprit Bumrah** | 75 | 1,780 | 2,069 | 2,591.8 | 85 (-10.7) | +747.1 | +2.82 | **98.8%** | 2.0 | [1 - 9] | **153.3** |
+| **2** | **Rashid Khan** | 122 | 2,780 | 3,403 | 3,676.0 | 153 (+10.9) | +378.2 | +5.36 | **86.0%** | 3.0 | [1 - 28] | **136.0** |
+| **3** | **Sunil Narine** | 67 | 1,556 | 1,754 | 2,116.9 | 66 (-9.2) | +502.7 | +2.18 | **84.8%** | 4.0 | [1 - 20] | **130.4** |
+| **4** | **Ehsan Khan** | 14 | 331 | 384 | 467.5 | 19 (+0.2) | +126.9 | +1.23 | **64.0%** | 8.0 | [1 - 32] | **121.9** |
+| **5** | **Josh Hazlewood** | 65 | 1,515 | 2,037 | 2,162.9 | 98 (+17.4) | +175.9 | +3.37 | **52.0%** | 10.0 | [1 - 44] | **111.7** |
+| **6** | **Nathan Ellis** | 43 | 959 | 1,260 | 1,422.5 | 58 (+2.8) | +229.7 | +1.74 | **41.6%** | 13.0 | [2 - 39] | **109.8** |
+| **7** | **Kuldeep Yadav** | 89 | 1,965 | 2,557 | 2,659.3 | 118 (+20.2) | +148.1 | +2.76 | **38.8%** | 14.0 | [2 - 44] | **108.1** |
+| **8** | **Varun Chakravarthy** | 95 | 2,182 | 2,841 | 2,961.6 | 135 (+26.1) | +159.4 | +3.11 | **46.0%** | 12.0 | [2 - 47] | **106.0** |
+| **9** | **Mustafizur Rahman** | 71 | 1,646 | 2,050 | 2,386.8 | 79 (-12.2) | +487.0 | +1.29 | **36.4%** | 16.0 | [2 - 44] | **102.4** |
+| **10** | **Bhuvneshwar Kumar** | 101 | 2,314 | 3,069 | 3,327.8 | 115 (-7.8) | +365.8 | +1.93 | **30.8%** | 15.0 | [2 - 47] | **101.5** |
 
 ### Official Top 5 Batters — IPL Only
 
