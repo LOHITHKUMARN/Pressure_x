@@ -1,0 +1,39 @@
+================================================================================
+PRESSURE-X: PLAYER IDENTITY RESOLUTION & ENTITY REGISTRY AUDIT REPORT
+================================================================================
+Total Unique Canonical Player IDs in Registry: 1,217
+Total Unique Player Names in Registry:        1,210
+Total Playing XI Match Appearances:            28,381
+Total Unique Strikers in Ball-by-Ball:         888
+Total Unique Bowlers in Ball-by-Ball:          647
+
+HOMONYMOUS ENTITIES AUDIT (Different Cricketers Sharing Identical Names):
+--------------------------------------------------------------------------------
+Player Name: "Abdul Samad" (maps to 2 distinct player IDs):
+  - Canonical ID 7446: Teams: ['Sunrisers Hyderabad', 'Lucknow Super Giants'] | Competitions: ['IPL 2022', 'IPL 2023']
+  - Canonical ID 6922: Teams: ['Pakistan A', 'Pakistan'] | Competitions: ['Mens T20 Emerging Teams Asia Cup 2024', 'Pakistan in New Zealand T20I Series 2025']
+Player Name: "Bashir Ahmad" (maps to 2 distinct player IDs):
+  - Canonical ID 39479: Teams: ['Afghanistan A'] | Competitions: ['Mens T20 Emerging Teams Asia Cup 2024']
+  - Canonical ID 29833: Teams: ['Afghanistan'] | Competitions: ['Asia Cup 2025', 'United Arab Emirates T20I Tri-Series 2025']
+Player Name: "Basil Hameed" (maps to 2 distinct player IDs):
+  - Canonical ID 8638: Teams: ['United Arab Emirates'] | Competitions: ['Asia Cup T20 Qualifiers 2022', 'Bangladesh in United Arab Emirates T20I Series 2022']
+  - Canonical ID 39444: Teams: ['United Arab Emirates'] | Competitions: ['Mens T20 Emerging Teams Asia Cup 2024']
+Player Name: "Haider Ali" (maps to 2 distinct player IDs):
+  - Canonical ID 7338: Teams: ['Pakistan', 'Pakistan A'] | Competitions: ['Mens Twenty20 Asia Cup 2022', 'England in Pakistan T20I Series 2022']
+  - Canonical ID 28756: Teams: ['United Arab Emirates'] | Competitions: ['Bangladesh in United Arab Emirates T20I Series 2025', 'Asia Cup 2025']
+Player Name: "Mohammad Ali" (maps to 2 distinct player IDs):
+  - Canonical ID 3083: Teams: ['Pakistan'] | Competitions: ['New Zealand in Pakistan T20I Series 2024']
+  - Canonical ID 20229: Teams: ['Pakistan'] | Competitions: ['Pakistan in England T20I Series 2024', 'Pakistan in New Zealand T20I Series 2025']
+Player Name: "Muhammad Farooq" (maps to 2 distinct player IDs):
+  - Canonical ID 27373: Teams: ['United Arab Emirates'] | Competitions: ['Mens T20 Emerging Teams Asia Cup 2024', 'Asia Cup 2025']
+  - Canonical ID 28978: Teams: ['United Arab Emirates'] | Competitions: ['Mens T20 Emerging Teams Asia Cup 2024']
+Player Name: "Rashid Khan" (maps to 2 distinct player IDs):
+  - Canonical ID 4722: Teams: ['Gujarat Titans', 'Afghanistan'] | Competitions: ['IPL 2022', 'Afghanistan in Zimbabwe T20I Series 2022']
+  - Canonical ID 20172: Teams: ['Nepal'] | Competitions: ['United Arab Emirates in Nepal T20I Series 2026']
+
+CONCLUSION & SYSTEM SAFEGUARD:
+All player aggregation, ratings, Bayesian shrinkage, and Monte Carlo simulations
+strictly group by canonical integer player_id (striker_id / bowler_id).
+String names are joined purely as display metadata post-aggregation.
+This guarantees zero cross-contamination between distinct cricketers sharing identical names.
+================================================================================

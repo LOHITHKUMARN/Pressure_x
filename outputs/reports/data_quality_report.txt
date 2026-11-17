@@ -1,0 +1,41 @@
+
+======================================================================
+PRESSURE-X  Data Quality Report
+======================================================================
+
+  ✓ ball_by_ball
+     rows=200,999  cols=33  dupes=0
+     ⚠ High-null columns (>20%): {'dismissal_type_id': '94.6%', 'dismissal_type': '94.6%', 'dismissed_player_id': '94.6%', 'extras_type': '94.1%'}
+
+  ✓ matches
+     rows=883  cols=22  dupes=0
+     ⚠ High-null columns (>20%): {'first_inn_revised_overs': '97.2%', 'second_inn_revised_overs': '97.2%', 'revised_target': '97.4%'}
+
+  ✓ competitions
+     rows=141  cols=4  dupes=0
+
+  ✓ teams
+     rows=353  cols=3  dupes=0
+
+  ✓ playing_eleven
+     rows=28,381  cols=9  dupes=0
+     ⚠ High-null columns (>20%): {'batting_order': '30.6%', 'is_captain': '30.5%', 'is_wk': '30.5%'}
+
+  ✓ competition_team_player_mapping
+     rows=6,413  cols=6  dupes=0
+
+  Cross-file integrity
+     ⚠ 2 striker_id values in ball_by_ball not found in playing_eleven
+
+  Delivery anomalies
+     total=200,999  legal=192,445  illegal=8,554  extras=11,832  unclassified=0
+
+  Competition classification
+     IPL: 5 competitions
+     T20I: 134 competitions
+     Other_T20: 2 competitions
+     Other_format: 0 competitions
+
+  Overall: PASS ✓
+======================================================================
+

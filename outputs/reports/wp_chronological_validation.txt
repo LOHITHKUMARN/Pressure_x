@@ -1,0 +1,17 @@
+======================================================================
+PRESSURE-X: Chronological Win Probability Validation Report
+======================================================================
+
+Validation Method       : Chronological Out-of-Sample Holdout
+Model Architecture      : LightGBM + CalibratedClassifierCV (Sigmoid / Platt Scaling)
+Train Matches (Earliest): 671 matches (2022-01-22 to 2025-11-09)
+Test Matches (Holdout)  : 171 matches (2025-11-13 to 2026-11-01)
+Train Deliveries        : 159,183
+Test Deliveries         : 39,846
+Zero Data Leakage Check : PASSED (0 overlap)
+
+--- Holdout Evaluation Metrics (Unseen Test Matches) ---
+Innings 1 (Pre-target)  : ROC-AUC = 0.6498 | Brier = 0.2415 | LogLoss = 0.6799
+Innings 2 (Chases)      : ROC-AUC = 0.8763 | Brier = 0.1482 | LogLoss = 0.4476
+Combined (All Innings)  : ROC-AUC = 0.7661 | Brier = 0.1973 | LogLoss = 0.5698
+======================================================================

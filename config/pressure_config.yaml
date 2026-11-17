@@ -1,0 +1,44 @@
+# PRESSURE-X — Pressure Intelligence Configuration
+# Version: 1.0.0
+
+pressure:
+  # Pressure bands for classification
+  bands:
+    low:    [0.0, 0.33]
+    medium: [0.33, 0.66]
+    high:   [0.66, 1.0]
+
+  # Required run rate thresholds (contextual, not absolute)
+  rrr_percentiles:
+    low: 25
+    medium: 50
+    high: 75
+    extreme: 90
+
+  # Win probability model parameters
+  win_probability:
+    model_type: "logistic_regression"  # baseline; upgraded to XGBoost in P1
+    features:
+      - "runs_required"
+      - "balls_remaining"
+      - "wickets_remaining"
+      - "current_run_rate"
+      - "required_run_rate"
+      - "innings_phase_encoded"
+      - "rrr_crf_ratio"
+
+  # Leverage score calculation
+  leverage:
+    smoothing_factor: 0.001  # prevent log(0)
+    min_leverage: 0.001
+
+  # Match closeness thresholds
+  closeness:
+    very_close_win_prob_band: [0.35, 0.65]
+    close_win_prob_band: [0.25, 0.75]
+
+  # Innings phase definitions (over numbers, 1-indexed)
+  phases:
+    powerplay: [1, 6]
+    middle: [7, 15]
+    death: [16, 20]

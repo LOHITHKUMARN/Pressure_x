@@ -1,0 +1,10 @@
+EntityRegistry summary:
+  Competitions : 141
+  Matches      : 883
+  Players      : 1,082
+  Teams        : 38
+  IPL matches  : 371
+  T20I matches : 482
+  Abandoned    : 40
+  Super overs  : 8
+  DLS/revised  : 19

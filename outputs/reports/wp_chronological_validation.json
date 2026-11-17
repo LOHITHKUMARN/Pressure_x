@@ -1,0 +1,35 @@
+{
+  "validation_type": "Chronological Out-of-Sample Holdout",
+  "model_architecture": "LightGBM + CalibratedClassifierCV (Sigmoid / Platt Scaling)",
+  "train_date_range": [
+    "2022-01-22",
+    "2025-11-09"
+  ],
+  "test_date_range": [
+    "2025-11-13",
+    "2026-11-01"
+  ],
+  "train_matches": 671,
+  "test_matches": 171,
+  "train_deliveries": 159183,
+  "test_deliveries": 39846,
+  "disjoint_match_guarantee": true,
+  "inn1_holdout": {
+    "auc": 0.6498331035617496,
+    "brier_score": 0.2414817063149925,
+    "log_loss": 0.679911916579856,
+    "deliveries": 20956
+  },
+  "inn2_holdout": {
+    "auc": 0.8763386175361673,
+    "brier_score": 0.14821594165723292,
+    "log_loss": 0.44755369259801153,
+    "deliveries": 18890
+  },
+  "combined_holdout": {
+    "auc": 0.7660648237866117,
+    "brier_score": 0.19726672126291506,
+    "log_loss": 0.5697566475185438,
+    "deliveries": 39846
+  }
+}

@@ -1,0 +1,65 @@
+# PRESSURE-X — Batting Intelligence Configuration
+# Version: 2.1.0 (Audited & Rigorously Calibrated)
+
+batting:
+  models:
+    expected_runs:
+      primary: "catboost"
+      secondary: "lightgbm"
+      baseline: "historical_mean"
+
+    boundary_probability:
+      type: "logistic_regression"
+
+    dot_ball_probability:
+      type: "logistic_regression"
+
+    dismissal_probability:
+      type: "catboost"
+
+    six_probability:
+      type: "logistic_regression"
+
+    four_probability:
+      type: "logistic_regression"
+
+  features:
+    delivery_context:
+      - "over_number"
+      - "ball_in_over"
+      - "innings_number"
+      - "innings_phase_encoded"
+      - "balls_remaining"
+      - "wickets_remaining"
+      - "current_run_rate"
+      - "required_run_rate"
+      - "runs_required"
+      - "pressure_score"
+      - "leverage_score"
+      - "win_probability_batting_team"
+
+    player_context:
+      - "batter_batting_style_encoded"
+      - "bowler_bowling_style_encoded"
+      - "batter_hand_vs_bowler_type"
+
+    historical:
+      - "batter_career_strike_rate_predelivery"
+      - "batter_career_avg_predelivery"
+      - "venue_avg_runs_per_ball_phase"
+      - "competition_avg_runs_per_ball"
+
+  rating:
+    # Rigorously verified qualification requirements:
+    # Ensures sufficient sustained sample size to eliminate low-volume anomalies
+    min_deliveries_faced: 250
+    min_matches: 8
+    min_hp_deliveries: 20
+    pressure_weight_high: 1.5
+    pressure_weight_medium: 1.1
+    pressure_weight_low: 0.8
+
+  # RAA = Runs Above Average; core metric
+  raa:
+    description: "Sum of (actual_runs - expected_runs) per delivery faced"
+    normalize_by: "deliveries_faced"

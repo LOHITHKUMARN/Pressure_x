@@ -1,0 +1,61 @@
+# PRESSURE-X — Bowling Intelligence Configuration
+# Version: 2.1.0 (Audited & Rigorously Calibrated)
+
+bowling:
+  models:
+    expected_runs:
+      primary: "catboost"
+      secondary: "lightgbm"
+      baseline: "historical_mean"
+
+    wicket_probability:
+      type: "catboost"
+
+    dot_ball_probability:
+      type: "logistic_regression"
+
+    boundary_probability:
+      type: "logistic_regression"
+
+    extra_probability:
+      type: "logistic_regression"
+
+  features:
+    delivery_context:
+      - "over_number"
+      - "ball_in_over"
+      - "innings_number"
+      - "innings_phase_encoded"
+      - "balls_remaining"
+      - "wickets_remaining_batting"
+      - "runs_required"
+      - "required_run_rate"
+      - "current_run_rate"
+      - "pressure_score"
+      - "leverage_score"
+      - "win_probability_batting_team"
+
+    player_context:
+      - "bowler_bowling_style_encoded"
+      - "batter_batting_style_encoded"
+      - "batter_hand_vs_bowler_type"
+
+    historical:
+      - "bowler_career_economy_predelivery"
+      - "bowler_career_wicket_rate_predelivery"
+      - "venue_avg_runs_conceded_phase"
+
+  rating:
+    # Rigorously verified qualification requirements:
+    # Requires sustained bowling volume equivalent to >=60 overs across >=8 matches
+    min_deliveries_bowled: 250
+    min_matches: 8
+    min_hp_deliveries: 20
+    pressure_weight_high: 1.5
+    pressure_weight_medium: 1.1
+    pressure_weight_low: 0.8
+
+  # RPA = Runs Prevented Above average; core bowling metric
+  rpa:
+    description: "Sum of (expected_runs - actual_runs) per legal delivery bowled"
+    normalize_by: "legal_deliveries_bowled"

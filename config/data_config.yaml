@@ -1,0 +1,83 @@
+# PRESSURE-X — Data Configuration
+# Version: 1.0.0
+
+project:
+  name: PRESSURE-X
+  version: "1.0.0"
+  description: "Advanced Cricket Pressure Intelligence System"
+
+paths:
+  raw: "data/raw"
+  interim: "data/interim"
+  processed: "data/processed"
+  features: "data/features"
+  models: "models"
+  outputs: "outputs"
+  logs: "logs"
+
+files:
+  ball_by_ball: "ball_by_ball.csv"
+  matches: "matches.csv"
+  competitions: "competitions.csv"
+  teams: "teams.csv"
+  playing_eleven: "playing_eleven.csv"
+  competition_team_player_mapping: "competition_team_player_mapping.csv"
+
+formats:
+  # T20 competition format keywords for classification
+  ipl_keywords:
+    - "Indian Premier League"
+    - "IPL"
+  t20i_keywords:
+    - "T20I"
+    - "Twenty20 International"
+    - "ICC World Twenty20"
+    - "ICC T20 World Cup"
+    - "Asia Cup T20"
+  t20_keywords:
+    - "T20"
+    - "Twenty20"
+    - "Twenty-20"
+
+cricket_rules:
+  legal_delivery_types:
+    - "legal"
+    - "normal"
+  extra_types:
+    - "wide"
+    - "no_ball"
+    - "bye"
+    - "leg_bye"
+    - "penalty"
+  wicket_dismissal_types:
+    - "bowled"
+    - "caught"
+    - "lbw"
+    - "run_out"
+    - "stumped"
+    - "hit_wicket"
+    - "obstructing_the_field"
+    - "handled_the_ball"
+    - "timed_out"
+    - "retired_hurt"
+  powerplay_overs: [1, 6]
+  middle_overs: [7, 15]
+  death_overs: [16, 20]
+  max_overs_t20: 20
+  max_wickets: 10
+  deliveries_per_over: 6
+
+validation:
+  min_deliveries_per_match: 60
+  max_deliveries_per_match: 300
+  min_matches_for_player: 3
+  expected_ball_by_ball_rows: 200999
+  expected_match_rows: 883
+  expected_competition_rows: 141
+  expected_team_rows: 353
+  expected_playing_eleven_rows: 28381
+  expected_competition_player_rows: 6413
+
+output:
+  parquet_compression: "snappy"
+  parquet_engine: "pyarrow"
